@@ -13,4 +13,7 @@ RUN curl -sSL https://get.rvm.io | bash -s stable
 RUN bash -c "source /etc/profile.d/rvm.sh && rvm install 2.0.0-p481"
 RUN bash -c "source /etc/profile.d/rvm.sh && rvm use --default 2.0.0-p481"
 
+#fix missing /dev/fd
+RUN test -e /dev/fd || ln -s /proc/self/fd /dev/fd
+
 ENV PATH /usr/local/rvm/gems/ruby-2.0.0-p481/bin:/usr/local/rvm/gems/ruby-2.0.0-p481@global/bin:/usr/local/rvm/rubies/ruby-2.0.0-p481/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/rvm/bin
